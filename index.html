@@ -605,6 +605,7 @@
       <ul>
         <li>A conventional project management platform built on React and Next.js, Node and Fastify services, and PostgreSQL. Nothing is generated from a prompt.</li>
         <li>The AI tab answers questions across project records and uploaded documents. I designed the schema and SQL behind that retrieval.</li>
+        <li>Underneath it, a multi-agent orchestrator runs over six <span class="term" tabindex="0" data-def="Model Context Protocol — a standard interface through which a model calls external tools and data sources, so each integration exposes the same contract instead of a bespoke one.">MCP</span> tool servers. The deterministic steps stay deterministic — plain code, same result every run — and only the steps that genuinely need judgement are handed to an agent.</li>
         <li>Four containerized services on <span class="term" tabindex="0" data-def="AWS's serverless container runtime, so containers run without provisioning or managing EC2 instances.">ECS Fargate</span>, shipped through GitHub Actions, IAM and S3 scoped per service.</li>
       </ul>
 
@@ -613,7 +614,7 @@
     </div>
     <dl class="p-side">
       <dt>Role</dt><dd>Software developer, full stack</dd>
-      <dt>Stack</dt><dd>TypeScript, React, Next.js, Node.js, Fastify, PostgreSQL</dd>
+      <dt>Stack</dt><dd>TypeScript, React, Next.js, Node.js, Fastify, PostgreSQL, MCP</dd>
       <dt>Cloud</dt><dd>AWS ECS Fargate, IAM, S3, Docker, GitHub Actions</dd>
       <dt>Scale</dt><dd>4 containerized services</dd>
     </dl>
