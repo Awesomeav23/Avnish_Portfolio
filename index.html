@@ -602,13 +602,21 @@
   "use strict";
   var $ = function(id){ return document.getElementById(id); };
 
-  var PROJECT_IDS = ['dynpro','samit','careertool','pitchwise','nova','petservices'];
-  function isProject(h){ return PROJECT_IDS.indexOf(h.replace('#','')) > -1; }
-  function toTop(){
-    if (!location.hash || isProject(location.hash)) window.scrollTo(0,0);
+  /* The project pages this used to switch between are gone, so their anchors
+     now match nothing. A fragment never reaches the server, so #nova cannot be
+     made to 404 — but it should not sit in the address bar of a page that has
+     no such section either. Anything that matches no element is dropped from
+     the URL and the page goes to the top. */
+  function cleanHash(){
+    var h = location.hash;
+    if (!h || h === '#') return;
+    var id = h.slice(1);
+    if (document.getElementById(id)) return;          // a real section: leave it
+    history.replaceState(null, '', location.pathname + location.search);
+    window.scrollTo(0, 0);
   }
-  window.addEventListener('hashchange', toTop);
-  if (location.hash) setTimeout(toTop, 0);
+  window.addEventListener('hashchange', cleanHash);
+  cleanHash();
   document.querySelectorAll('.term').forEach(function(t){
     t.addEventListener('click', function(){ t.focus(); });
   });
